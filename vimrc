@@ -8,8 +8,9 @@ filetype plugin on " Use filetype plugins
 filetype indent on " Use filetype indent
 set mouse=a        " Allow use of the mouse
 set showcmd        " Show incomplete commands during input
-set backspace=indent,eol,start " Have 'normal' backspace in insert mode
 set history=1000   " How many lines of history VIM should remember
+set tabpagemax=150 " Not just 10!
+set backspace=indent,eol,start " Have 'normal' backspace in insert mode
 
 "
 " > Style
@@ -77,6 +78,10 @@ nnoremap <F5> "=strftime("%d-%b-%Y")<CR>P
 inoremap <F5> <C-R>=strftime("%d-%b-%Y")<CR>
 " pritn -> print
 iab pritn print
+" Make > and < stay after use
+vmap > >gv
+vmap < <gv
+
 
 "
 " > Global Folding Settings
