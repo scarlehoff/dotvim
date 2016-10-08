@@ -21,6 +21,8 @@ set number         " Precede each line with its line number
 set ruler          " Show cursor position at the botton left
 set scrolloff=3    " Scroll when cursor get within 3 char of the top/bottom edge
 set sidescroll=1   " Left/right
+set laststatus=2   " (with 1 we can remove the white line below, config for that line v
+set statusline=%F%m%r%h%w\ %{&ff}\ %y\ [L%l,C%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} "Easy peasy
 
 "
 " > Performance Settings
