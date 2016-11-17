@@ -11,7 +11,7 @@ set showcmd        " Show incomplete commands during input
 set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
 set backspace=indent,eol,start " Have 'normal' backspace in insert mode
-set isk+=:         " very useful for using labels in the form eq:blabla in latex!
+autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 
 "
 " > Style
