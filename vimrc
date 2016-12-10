@@ -11,6 +11,7 @@ set showcmd        " Show incomplete commands during input
 set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
 set backspace=indent,eol,start " Have 'normal' backspace in insert mode
+autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 
 "
 " > Style
@@ -99,9 +100,9 @@ set autoindent    " Copy indent from current line when starting a new one
 set smartindent   " Try being clever for new-line indenting
 set expandtab     " Convert tab to spaces
 set smarttab      " When on a <tab>/<bs> will insert/<remove> blanks according to swhiftwidth
-set shiftwidth=4
-set tabstop=4     " Number of spaces <tab>s in file counts
-set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
+set shiftwidth=3
+set tabstop=3     " Number of spaces <tab>s in file counts
+set softtabstop=3 " Number of spaces a <tab> counts for when inserting <tab>
 set shiftround    " Round indent to multiple of shiftwidth
 
 "
@@ -259,3 +260,8 @@ nmap <F9> :RainbowParenthesesToggle <CR>
 " set foldlevel=0       " Fold it all!
 " set foldlevelstart=99 "Open file unfolded
 " "
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
