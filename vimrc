@@ -90,6 +90,7 @@ vmap < <gv
 " > commented out, trying fastfold
 "
 set foldmethod=syntax " Fold depending on the lang.
+set foldlevelstart=99 "Open file unfolded
 
 "
 " > Global Indentation options
