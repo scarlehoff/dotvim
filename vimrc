@@ -237,7 +237,7 @@ let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetyp
 nmap <F8> :SyntasticCheck <CR>
 
 " Tabular:
-vnoremap <F3> :Tab /= <CR> 
+vnoremap <F3> :Tab /=<CR> 
 
 " NERDTree
 nmap <F7> :NERDTree <CR>
