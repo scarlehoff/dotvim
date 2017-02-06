@@ -3,6 +3,7 @@
 "
 set nocompatible
 execute pathogen#infect()
+let myfiletypefile = "~/.vim/myfiletypes.vim"
 syntax on          " Syntax highlighting on
 filetype plugin on " Use filetype plugins
 filetype indent on " Use filetype indent
