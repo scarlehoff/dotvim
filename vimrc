@@ -101,10 +101,11 @@ set autoindent    " Copy indent from current line when starting a new one
 set smartindent   " Try being clever for new-line indenting
 set expandtab     " Convert tab to spaces
 set smarttab      " When on a <tab>/<bs> will insert/<remove> blanks according to swhiftwidth
-set shiftwidth=3
-set tabstop=3     " Number of spaces <tab>s in file counts
-set softtabstop=3 " Number of spaces a <tab> counts for when inserting <tab>
 set shiftround    " Round indent to multiple of shiftwidth
+" Fortran indentation will be different as per fortram.vim
+set shiftwidth=4
+set tabstop=4     " Number of spaces <tab>s in file counts
+set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
 
 "
 " > Block commenting, all active for all lang
