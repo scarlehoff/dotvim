@@ -1,17 +1,32 @@
 #!/bin/bash
 
-# Link vimrc to .vimrc
-ln -s $PWD/vimrc $HOME/.vimrc
 
 # Install pathogen
 # This is just to help managing plugins
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+if [[ $1 -eq update ]]
+then
+    for i in ~/.vim/bundle/*
+    do
+        echo "Updating $i"
+        cd $i
+        git pull
+        cd -
+    done
+    exit 0
+fi
+
+# Link vimrc to .vimrc
+ln -s $PWD/vimrc $HOME/.vimrc
 
 # 
 # All plugins
 #
 
 cd ~/.vim/bundle
+# Kalisi color scheme
+git clone https://github.com/freeo/vim-kalisi
 # Fastfold
 git clone https://github.com/Konfekt/FastFold.git
 # Nerdtree

@@ -1,8 +1,12 @@
+" Do colorscheme first to allow for it to be changed by plugins
+colorscheme desert " Best color scheme out there
+
 "
 " > Global options
 "
 set nocompatible
 execute pathogen#infect()
+" execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
 syntax on          " Syntax highlighting on
 filetype plugin on " Use filetype plugins
@@ -18,13 +22,13 @@ autocmd FileType tex setlocal isk+=: " very useful for using labels in the form 
 " > Style
 "
 set t_Co=256       " Use the terminal wit 256 colors
-colorscheme desert " Best color scheme out there
 set number         " Precede each line with its line number
 set ruler          " Show cursor position at the botton left
 set scrolloff=3    " Scroll when cursor get within 3 char of the top/bottom edge
 set sidescroll=1   " Left/right
 set laststatus=2   " (with 1 we can remove the white line below, config for that line v
 set statusline=%F%m%r%h%w\ %{&ff}\ %y\ [L%l,C%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} "Easy peasy
+set background=dark
 
 "
 " > Performance Settings
