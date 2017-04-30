@@ -1,5 +1,6 @@
 " Do colorscheme first to allow for it to be changed by plugins
-colorscheme desert " Best color scheme out there
+set t_Co=256       " Use the terminal wit 256 coloRs
+colorscheme kalisi " Best color scheme out there, desert
 
 "
 " > Global options
@@ -21,7 +22,6 @@ autocmd FileType tex setlocal isk+=: " very useful for using labels in the form 
 "
 " > Style
 "
-set t_Co=256       " Use the terminal wit 256 colors
 set number         " Precede each line with its line number
 set ruler          " Show cursor position at the botton left
 set scrolloff=3    " Scroll when cursor get within 3 char of the top/bottom edge
@@ -119,8 +119,8 @@ set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
 vnoremap ~# :s!^!# !<cr>:noh<cr>
 vnoremap @# :s!^# !!<cr>:noh<cr>
 " Latex
-vnoremap ~% :s!^!%!<cr>:noh<cr>
-vnoremap @% :s!^%!!<cr>:noh<cr>
+vnoremap ~% :s!^!% !<cr>:noh<cr>
+vnoremap @% :s!^% !!<cr>:noh<cr>
 " C/C++
 vnoremap ~/ :s!^!\/\/!<cr>:noh<cr>
 vnoremap @/ :s!^\/\/!!<cr>:noh<cr>
