@@ -1,6 +1,6 @@
 " Do colorscheme first to allow for it to be changed by plugins
-set t_Co=256       " Use the terminal wit 256 coloRs
-colorscheme kalisi " Best color scheme out there, desert
+set t_Co=256       " Use the terminal wit 256 colors
+colorscheme kalisi " Best color scheme out there, desert, but using a different one now, eh
 
 "
 " > Global options
@@ -271,3 +271,6 @@ highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Re
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+
+" Fix the annoying behaviour of Kalisi with matching
+hi MatchParen ctermbg=0 ctermfg=200 
