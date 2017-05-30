@@ -5,7 +5,7 @@
 # This is just to help managing plugins
 mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-if [[ $1 -eq update ]]
+if [[ "$1" = "update" ]]
 then
     for i in ~/.vim/bundle/*
     do
@@ -50,4 +50,5 @@ vim -u NONE -c "helptags vim-fugitive/doc" -c q
 # Machit
 git clone https://github.com/codescv/vim-matchit
 
-
+# Pydoc
+git clone https://github.com/fs111/pydoc.vim.git
