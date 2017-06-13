@@ -79,7 +79,7 @@ nmap j gj
 nmap k gk
 " Remap vim 0 to first non-blank
 map 0 ^
-" Toggle/untoggle spell checking
+" Toggle/untoggle spell checking (=z will give you a list of suggestions)
 map "ss :setlocal spell!<CR>
 " F5 inserts date
 nnoremap <F5> "=strftime("%d-%b-%Y")<CR>P
