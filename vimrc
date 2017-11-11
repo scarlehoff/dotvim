@@ -18,6 +18,7 @@ set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
 set backspace=indent,eol,start " Have 'normal' backspace in insert mode
 autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
+set hidden
 
 "
 " > Style
@@ -133,6 +134,9 @@ vnoremap @* :s!^*  !!<cr>:noh<cr>
 " Fortran90
 vnoremap ~1 :s!^!\!  !<cr>:noh<cr>
 vnoremap @1 :s!^\!  !!<cr>:noh<cr>
+" Vim
+vnoremap ~" :s!^!"  !<cr>:noh<cr>
+vnoremap @" :s!^"  !!<cr>:noh<cr>
 
 "
 " > If we are using gvim, change a few things
@@ -246,7 +250,39 @@ nmap <F8> :SyntasticCheck <CR>
 vnoremap <F3> :Tab /=<CR> 
 
 " NERDTree
-nmap <F7> :NERDTree <CR>
+" Surely there must be an easier way...
+" This function makes NERDTree highlight on whatever file you happened to be
+" when it opens and, if it is already opened, every time you change buffer
+" and, contrary to other internet solutions, it let you close nerdtree...
+let g:nerdTreeOpen=0
+nmap <F7> :call CustomNERDTreeToggle() <CR>
+function! CustomNERDTreeToggle() 
+    let g:nerdTreeOpen=0
+    let s:isNerdTreeActive=exists("t:NERDTreeBufName")
+    if (s:isNerdTreeActive)
+        let s:isNerdTreeShown=bufwinnr(t:NERDTreeBufName)
+        if (s:isNerdTreeShown != -1) 
+            NERDTreeClose
+        else
+            NERDTreeFind
+            wincmd p
+            let g:nerdTreeOpen=1
+        endif
+    else
+        NERDTreeFind
+        wincmd p
+        let g:nerdTreeOpen=1
+    endif
+endfunction
+autocmd BufEnter * if (&modifiable && g:nerdTreeOpen) | NERDTreeFind | wincmd p | endif
+
+" Open nerdtree when openning a new directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+" Close vim when only nerdtree is left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " RainbowParentheses:
 nmap <F9> :RainbowParenthesesToggle <CR>
@@ -274,3 +310,4 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 
 " Fix the annoying behaviour of Kalisi with matching
 hi MatchParen ctermbg=0 ctermfg=200 
+

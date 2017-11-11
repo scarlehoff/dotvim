@@ -29,8 +29,10 @@ cd ~/.vim/bundle
 git clone https://github.com/freeo/vim-kalisi
 # Fastfold
 git clone https://github.com/Konfekt/FastFold.git
-# Nerdtree
+# Nerdtree  (and git support)
 git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/jistr/vim-nerdtree-tabs.git
+
 # Syntastic (it requires syntax checkers, duh!)
 git clone  https://github.com/scrooloose/syntastic.git
 # Tabular (text aligner)
