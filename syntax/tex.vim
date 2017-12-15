@@ -13,3 +13,9 @@ endfunction
 set concealcursor=nvc
 let g:tex_conceal="adgms"
 
+" Looks for the line I'm in with \lv from vim to zathura and with ctrl+left
+" click from zathura to vim
+let g:vimtex_view_method = 'zathura' 
+
+" Don't open a window on warnings!
+let g:vimtex_quickfix_open_on_warning = 0
