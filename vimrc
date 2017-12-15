@@ -311,3 +311,5 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 " Fix the annoying behaviour of Kalisi with matching
 hi MatchParen ctermbg=0 ctermfg=200 
 
+" Completor
+let g:completor_clang_binary = '/usr/bin/clang'

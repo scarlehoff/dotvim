@@ -25,31 +25,34 @@ ln -s $PWD/vimrc $HOME/.vimrc
 #
 
 cd ~/.vim/bundle
+
 # Kalisi color scheme
 git clone https://github.com/freeo/vim-kalisi
-# Fastfold
-git clone https://github.com/Konfekt/FastFold.git
-# Nerdtree  (and git support)
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/jistr/vim-nerdtree-tabs.git
-
-# Syntastic (it requires syntax checkers, duh!)
-git clone  https://github.com/scrooloose/syntastic.git
-# Tabular (text aligner)
-git clone git://github.com/godlygeek/tabular.git
-# Rainbow Parentheses
-git clone https://github.com/kien/rainbow_parentheses.vim
-# Snippets
-git clone https://github.com/tomtom/tlib_vim.git
-git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
-git clone https://github.com/garbas/vim-snipmate.git
-git clone https://github.com/honza/vim-snippets.git
 # Vimtex
 git clone https://github.com/lervag/vimtex.git
 if [[ ! $(command -v zathura) ]]
 then
     echo "Zathura is needed to use the synctex capabilities of vimtex"
 fi
+# Syntastic (it requires syntax checkers, duh!)
+git clone  https://github.com/scrooloose/syntastic.git
+# Tabular (text aligner)
+git clone git://github.com/godlygeek/tabular.git
+# Rainbow Parentheses
+git clone https://github.com/kien/rainbow_parentheses.vim
+# Completor
+git clone https://github.com/maralla/completor.vim.git
+
+# Fastfold
+git clone https://github.com/Konfekt/FastFold.git
+# Nerdtree  (and git support)
+git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/jistr/vim-nerdtree-tabs.git
+# Snippets
+git clone https://github.com/tomtom/tlib_vim.git
+git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
+git clone https://github.com/garbas/vim-snipmate.git
+git clone https://github.com/honza/vim-snippets.git
 
 # FuGITive
 git clone git://github.com/tpope/vim-fugitive.git
