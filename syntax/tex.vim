@@ -41,3 +41,9 @@ let g:syntastic_quiet_messages = {
         \ '\mpossible unwanted space at "{"'
         \]
 \}
+
+" Don't use completor for latex, it's more annoying than anything else...
+" maybe I should find a way of using completor with latex as I want it to
+" behave
+let g:completor_auto_trigger = 0
+inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
