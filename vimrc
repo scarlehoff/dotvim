@@ -6,6 +6,10 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 " > Global options
 "
 set nocompatible
+if v:version < '800' || !has('python')
+    call add(g:pathogen_disabled, "completor.vim")
+endif
+
 execute pathogen#infect()
 " execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
@@ -18,6 +22,7 @@ set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
 set backspace=indent,eol,start " Have 'normal' backspace in insert mode
 autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
+let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
 set hidden
 
 "
@@ -68,8 +73,13 @@ set wildignore+=*.spl                          " Compiled spelling word list
 "
 " > Key Mapping
 "
+" clipboard control
 " ctrl + c == "+y i
-vnoremap <C-c> "+y i 
+vnoremap <C-c> "+y i
+noremap ty "+y
+noremap tY "+Y
+noremap tp "+p
+noremap tP "+P
 set pastetoggle=<F10>
 " disable recording
 map q <Nop> 
@@ -313,3 +323,5 @@ hi MatchParen ctermbg=0 ctermfg=200
 
 " Completor
 let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_auto_trigger = 0 " Don't activate completor by default
+inoremap <expr><C-@> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
