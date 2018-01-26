@@ -6,10 +6,10 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 " > Global options
 "
 set nocompatible
+let g:pathogen_disabled = []
 if v:version < '800' || !has('python')
     call add(g:pathogen_disabled, "completor.vim")
 endif
-
 execute pathogen#infect()
 " execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
