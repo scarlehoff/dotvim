@@ -33,7 +33,6 @@ nnoremap <leader>cw :VimtexCountWords <CR>
 " :VimtexCountLetters
 " For the rest look at https://github.com/lervag/vimtex/wiki/usage#default-mappings
 
-
 " Silence parts of syntastic
 let g:syntastic_quiet_messages = { 
     \"type": "style" ,
@@ -41,9 +40,3 @@ let g:syntastic_quiet_messages = {
         \ '\mpossible unwanted space at "{"'
         \]
 \}
-
-" Don't use completor for latex, it's more annoying than anything else...
-" maybe I should find a way of using completor with latex as I want it to
-" behave
-let g:completor_auto_trigger = 0
-inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"

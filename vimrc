@@ -323,5 +323,14 @@ hi MatchParen ctermbg=0 ctermfg=200
 
 " Completor
 let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_auto_trigger = 0 " Don't activate completor by default
-inoremap <expr><C-@> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+let g:completor_auto_trigger = 0 " Don't activate completor by default! 
+function! CompletorToggle()
+    if (g:completor_auto_trigger == 0)
+        let g:completor_auto_trigger = 1
+    else
+        let g:completor_auto_trigger = 0
+    endif
+endfunction
+noremap <C-@> :call CompletorToggle() <CR>
+inoremap <C-@> <c-o>:call CompletorToggle()<CR>
+
