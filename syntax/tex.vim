@@ -15,7 +15,14 @@ let g:tex_conceal="adgms"
 
 " Looks for the line I'm in with \lv from vim to zathura and with ctrl+left
 " click from zathura to vim
-let g:vimtex_view_method = 'zathura' 
+
+if executable('zathura')
+    let g:vimtex_view_method = 'zathura' 
+endif
+
+if !executable('latexmk')
+    let g:vimtex_compiler_enabled = 0
+endif
 
 " Don't open a window on warnings!
 let g:vimtex_quickfix_open_on_warning = 0
