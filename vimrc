@@ -334,3 +334,7 @@ endfunction
 noremap <C-@> :call CompletorToggle() <CR>
 inoremap <C-@> <c-o>:call CompletorToggle()<CR>
 
+"For jedi-vim: don't show the docstring window automatically 
+autocmd FileType python setlocal completeopt-=preview
+
+autocmd BufRead,BufNewFile *.run set filetype=nnlojet

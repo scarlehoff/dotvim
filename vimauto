@@ -63,3 +63,6 @@ git clone https://github.com/codescv/vim-matchit
 
 # Pydoc
 git clone https://github.com/fs111/pydoc.vim.git
+
+# Jedi-vim
+git clone --recursive https://github.com/davidhalter/jedi-vim.git
