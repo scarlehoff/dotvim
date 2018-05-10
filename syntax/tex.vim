@@ -18,6 +18,7 @@ let g:tex_conceal="adgms"
 
 if executable('mupdf')
     let g:vimtex_view_method = 'mupdf'
+    let g:vimtex_view_automatic = 0
 endif
 
 if !executable('latexmk')
