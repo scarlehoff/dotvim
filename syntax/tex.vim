@@ -15,11 +15,15 @@ let g:tex_conceal="adgms"
 
 " Looks for the line I'm in with \lv from vim to zathura and with ctrl+left
 " click from zathura to vim
-
-if executable('mupdf')
-    let g:vimtex_view_method = 'mupdf'
-    let g:vimtex_view_automatic = 0
+"
+if executable('zathura')
+    let g:vimtex_view_method = 'zathura'
 endif
+
+"  if executable('mupdf')
+"      let g:vimtex_view_method = 'mupdf'
+"      let g:vimtex_view_automatic = 0
+"  endif
 
 if !executable('latexmk')
     let g:vimtex_compiler_enabled = 0
