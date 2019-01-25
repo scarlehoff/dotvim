@@ -7,10 +7,9 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 "
 set nocompatible
 let g:pathogen_disabled = []
-if v:version < '800' || !has('python')
-    call add(g:pathogen_disabled, "completor.vim")
-endif
+call add(g:pathogen_disabled, "completor.vim")
 execute pathogen#infect()
+
 " execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
 syntax on          " Syntax highlighting on
@@ -196,67 +195,20 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
-"
-" > Find stuff function
-"
-nmap gf <c-w>gF
-nmap gF :call GoToFunction()<cR>
-function! GoToFunction()
-    let selWord   = shellescape(expand("<cword>"))
-    let pythoncmd = $vimprobe . ' ' .selWord
+autocmd BufRead,BufNewFile *.run set filetype=nnlojet
 
-    let l:list      = system(pythoncmd)
-    let l:listFiles = split(l:list, "\n")
-    " Hopefully we only found one
-    " but we might not be that lucky
-    let l:num = len(listFiles)
-    let l:i   = 1
-    let l:str = ""
-    while l:i <= l:num
-        let l:str = l:str . l:i . " " . l:listFiles[l:i-1] . "\n"
-        let l:i   = l:i + 1
-    endwhile
-    " Now select file
-    if l:num < 1
-        echo "No file found for ".selWord
-        echo pythoncmd
-        return
-    elseif l:num != 1
-        echo l:str
-        let l:input=input("Which?\n")
-        if strlen(l:input)==0
-            return
-        endif
-        if strlen(substitute(l:input, "[0-9]", "", "g"))>0
-            echo "Not a number"
-            return
-        endif
-        if l:input <1 || l:input>l:num
-            echo "Fuck off"
-            return
-        endif
-        let l:line = l:listFiles[l:input-1]
-    else
-        let l:line = l:list
-    endif
-    " And now open a new tab!
-    execute "tabe ".l:line
-endfunction
+
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+" Fix the annoying behaviour of Kalisi with matching
+hi MatchParen ctermbg=0 ctermfg=200 
 
 "
 " > Plugin Settings
 "
-" Syntastic:
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list =  1
-let g:syntastic_auto_loc_list            =  0
-let g:syntastic_check_on_open            =  1
-let g:syntastic_check_on_wq              =  0
-let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetypes': ["tex"],'passive_filetypes': [] }
-nmap <F8> :SyntasticToggleMode <CR>
-
+"
 " Tabular:
 vnoremap <F3> :Tab /=<CR> 
 
@@ -298,6 +250,40 @@ let NERDTreeDirArrows = 1
 " RainbowParentheses:
 nmap <F9> :RainbowParenthesesToggle <CR>
 
+" Fugitive: (:Gdiff, :Gstatus)
+" Open the quickfix list after :Ggrep (or any grep actually)
+autocmd QuickFixCmdPost *grep* cwindow
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
+"
+"
+" > Plugin graveyard
+"
+"
+"
+" Syntastic:
+"  set statusline+=%#warningmsg#
+"  set statusline+=%{SyntasticStatuslineFlag()}
+"  set statusline+=%*
+"  let g:syntastic_always_populate_loc_list =  1
+"  let g:syntastic_auto_loc_list            =  0
+"  let g:syntastic_check_on_open            =  1
+"  let g:syntastic_check_on_wq              =  0
+"  let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetypes': ["tex"],'passive_filetypes': [] }
+"  nmap <F8> :SyntasticToggleMode <CR>
+   
 " " 
 " Defaults: (already set like this by vim)
 " > Apparience
@@ -314,28 +300,70 @@ nmap <F9> :RainbowParenthesesToggle <CR>
 " set foldlevelstart=99 "Open file unfolded
 " "
 
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
-
-" Fix the annoying behaviour of Kalisi with matching
-hi MatchParen ctermbg=0 ctermfg=200 
 
 " Completor
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_auto_trigger = 0 " Don't activate completor by default! 
-function! CompletorToggle()
-    if (g:completor_auto_trigger == 0)
-        let g:completor_auto_trigger = 1
-    else
-        let g:completor_auto_trigger = 0
-    endif
-endfunction
-noremap <C-@> :call CompletorToggle() <CR>
-inoremap <C-@> <c-o>:call CompletorToggle()<CR>
+"  let g:completor_clang_binary = '/usr/bin/clang'
+"  let g:completor_auto_trigger = 0 " Don't activate completor by default! 
+"  function! CompletorToggle()
+"      if (g:completor_auto_trigger == 0)
+"          let g:completor_auto_trigger = 1
+"      else
+"          let g:completor_auto_trigger = 0
+"      endif
+"  endfunction
+"  noremap <C-@> :call CompletorToggle() <CR>
+"  inoremap <C-@> <c-o>:call CompletorToggle()<CR>
+"  "For jedi-vim: don't show the docstring window automatically 
+"  autocmd FileType python setlocal completeopt-=preview
 
-"For jedi-vim: don't show the docstring window automatically 
-autocmd FileType python setlocal completeopt-=preview
 
-autocmd BufRead,BufNewFile *.run set filetype=nnlojet
+
+"  "
+"  " > Find stuff function
+"  "
+"  nmap gf <c-w>gF
+"  nmap gF :call GoToFunction()<cR>
+"  function! GoToFunction()
+"      let selWord   = shellescape(expand("<cword>"))
+"      let pythoncmd = $vimprobe . ' ' .selWord
+"  
+"      let l:list      = system(pythoncmd)
+"      let l:listFiles = split(l:list, "\n")
+"      " Hopefully we only found one
+"      " but we might not be that lucky
+"      let l:num = len(listFiles)
+"      let l:i   = 1
+"      let l:str = ""
+"      while l:i <= l:num
+"          let l:str = l:str . l:i . " " . l:listFiles[l:i-1] . "\n"
+"          let l:i   = l:i + 1
+"      endwhile
+"      " Now select file
+"      if l:num < 1
+"          echo "No file found for ".selWord
+"          echo pythoncmd
+"          return
+"      elseif l:num != 1
+"          echo l:str
+"          let l:input=input("Which?\n")
+"          if strlen(l:input)==0
+"              return
+"          endif
+"          if strlen(substitute(l:input, "[0-9]", "", "g"))>0
+"              echo "Not a number"
+"              return
+"          endif
+"          if l:input <1 || l:input>l:num
+"              echo "Fuck off"
+"              return
+"          endif
+"          let l:line = l:listFiles[l:input-1]
+"      else
+"          let l:line = l:list
+"      endif
+"      " And now open a new tab!
+"      execute "tabe ".l:line
+"  endfunction
+"  
+"  
+"  

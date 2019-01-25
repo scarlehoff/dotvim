@@ -1,4 +1,7 @@
 
+
+
+
 """""""""""""
 " vim-jedi:
 "      Completion <C-Space>
@@ -15,7 +18,12 @@
 
 " Complete only when pressing ctrl+space
 " note this overrides ctrl+space for completortoggle
-let g:jedi#popup_on_dot = 0 
-
-" Use a top split (just like with the docstring) when going to a definition
-let g:jedi#use_splits_not_buffers = "top"
+"  let g:jedi#popup_on_dot = 0
+"  
+"  " Use a top split (just like with the docstring) when going to a definition
+"  "  let g:jedi#use_splits_not_buffers = "top"
+"  let g:jedi#use_tab_not_buffers = 1
+"  
+"  " Goto definition
+"  let g:jedi#goto_assignments_command = ""
+"  
