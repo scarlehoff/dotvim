@@ -7,7 +7,6 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 "
 set nocompatible
 let g:pathogen_disabled = []
-call add(g:pathogen_disabled, "completor.vim")
 execute pathogen#infect()
 
 " execute pathogen#helptags() " Update helptags
@@ -261,6 +260,8 @@ let g:ale_linters = {
 \}
 let g:ale_enabled = 0
 nmap <F8> :ALEToggle <CR>
+
+set completeopt-=preview
 
 
 " Eventually I will move everything to ALE
