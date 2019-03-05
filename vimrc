@@ -253,6 +253,19 @@ nmap <F9> :RainbowParenthesesToggle <CR>
 " Fugitive: (:Gdiff, :Gstatus)
 " Open the quickfix list after :Ggrep (or any grep actually)
 autocmd QuickFixCmdPost *grep* cwindow
+nmap <F6> :Gstatus <CR>
+
+" Syntastic:
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list =  1
+let g:syntastic_auto_loc_list            =  0
+let g:syntastic_check_on_open            =  1
+let g:syntastic_check_on_wq              =  0
+let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetypes': ["tex"],'passive_filetypes': [] }
+nmap <F8> :SyntasticToggleMode <CR>
+ 
 
 
 
@@ -273,17 +286,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 "
 "
 "
-" Syntastic:
-"  set statusline+=%#warningmsg#
-"  set statusline+=%{SyntasticStatuslineFlag()}
-"  set statusline+=%*
-"  let g:syntastic_always_populate_loc_list =  1
-"  let g:syntastic_auto_loc_list            =  0
-"  let g:syntastic_check_on_open            =  1
-"  let g:syntastic_check_on_wq              =  0
-"  let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetypes': ["tex"],'passive_filetypes': [] }
-"  nmap <F8> :SyntasticToggleMode <CR>
-   
+  
 " " 
 " Defaults: (already set like this by vim)
 " > Apparience

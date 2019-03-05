@@ -52,3 +52,5 @@ let g:syntastic_quiet_messages = {
         \ '\mpossible unwanted space at "{"'
         \]
 \}
+
+
