@@ -6,7 +6,7 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 " > Global options
 "
 set nocompatible
-let g:pathogen_disabled = []
+let g:pathogen_disabled = ["syntastic.vim"]
 execute pathogen#infect()
 
 " execute pathogen#helptags() " Update helptags
@@ -255,9 +255,9 @@ autocmd QuickFixCmdPost *grep* cwindow
 nmap <F6> :Gstatus <CR>
 
 " ALE Asynchronous Lint Engine
-let g:ale_linters = {
-\ 'python' : ['pylint'],
-\}
+"  let g:ale_linters = {
+"  \ 'python' : ['pylint'],
+"  \}
 let g:ale_enabled = 0
 nmap <F8> :ALEToggle <CR>
 
@@ -275,7 +275,24 @@ set completeopt-=preview
 "  nmap <F8> :SyntasticToggleMode <CR>
 "   
 
+" Completor
+" For jedi-vim: don't show the docstring window automatically 
+autocmd FileType python setlocal completeopt-=preview
+let g:completor_clang_binary = '/usr/bin/clang'
+let g:completor_auto_trigger = 1 " Don't activate completor by default! 
+function! CompletorToggle()
+    if (g:completor_auto_trigger == 0)
+        let g:completor_auto_trigger = 1
+    else
+        let g:completor_auto_trigger = 0
+    endif
+endfunction
+noremap <C-@> :call CompletorToggle() <CR>
+inoremap <C-@> <c-o>:call CompletorToggle()<CR>
 
+noremap <s-k> :call completor#do('doc')<CR>
+noremap <c-d> :call completor#do('definition')<CR>
+let g:completor_complete_options = 'menuone,noselect'
 
 
 
@@ -312,20 +329,6 @@ set completeopt-=preview
 " "
 
 
-" Completor
-"  let g:completor_clang_binary = '/usr/bin/clang'
-"  let g:completor_auto_trigger = 0 " Don't activate completor by default! 
-"  function! CompletorToggle()
-"      if (g:completor_auto_trigger == 0)
-"          let g:completor_auto_trigger = 1
-"      else
-"          let g:completor_auto_trigger = 0
-"      endif
-"  endfunction
-"  noremap <C-@> :call CompletorToggle() <CR>
-"  inoremap <C-@> <c-o>:call CompletorToggle()<CR>
-"  "For jedi-vim: don't show the docstring window automatically 
-"  autocmd FileType python setlocal completeopt-=preview
 
 
 
