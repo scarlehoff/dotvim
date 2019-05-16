@@ -76,3 +76,7 @@ git clone https://github.com/maralla/completor.vim.git
 # git clone --recursive https://github.com/davidhalter/jedi-vim.git
 # cd jedi-vim
 # git submodule update --init
+
+
+# Github Markdown
+git clone https://github.com/rhysd/vim-gfm-syntax.git

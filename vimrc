@@ -297,6 +297,8 @@ let g:completor_complete_options = 'menuone,noselect'
 
 
 
+" vim-gfm-syntax (vim github markdown)
+" let g:gfm_syntax_emoji_conceal=1
 
 
 
