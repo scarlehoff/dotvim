@@ -11,8 +11,8 @@ execute pathogen#infect()
 
 " execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
-syntax on          " Syntax highlighting on
 filetype plugin on " Use filetype plugins
+syntax on          " Syntax highlighting on
 filetype indent on " Use filetype indent
 set mouse=a        " Allow use of the mouse
 set showcmd        " Show incomplete commands during input
