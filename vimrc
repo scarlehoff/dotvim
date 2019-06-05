@@ -22,6 +22,7 @@ set backspace=indent,eol,start " Have 'normal' backspace in insert mode
 autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 autocmd FileType bib setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
+let g:vimtex_view_method = 'zathura' " Now needs to be set here instead of in tex.vim? why?
 set hidden
 
 "
