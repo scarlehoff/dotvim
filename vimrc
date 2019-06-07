@@ -23,6 +23,7 @@ autocmd FileType tex setlocal isk+=: " very useful for using labels in the form 
 autocmd FileType bib setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
 let g:vimtex_view_method = 'zathura' " Now needs to be set here instead of in tex.vim? why?
+let g:completor_tex_omni_trigger = g:vimtex#re#deoplete
 set hidden
 
 "
