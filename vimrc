@@ -15,6 +15,7 @@ filetype plugin on " Use filetype plugins
 syntax on          " Syntax highlighting on
 filetype indent on " Use filetype indent
 set mouse=a        " Allow use of the mouse
+set ttymouse=sgr   " Fix the problem with the mouse past column 220
 set showcmd        " Show incomplete commands during input
 set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
