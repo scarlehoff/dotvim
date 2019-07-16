@@ -73,6 +73,9 @@ git clone https://github.com/mxw/vim-jsx.git
 
 # # Completor
 git clone https://github.com/maralla/completor.vim.git
+cd completor.vim
+make js
+cd -
 # # Jedi-vim
 # git clone --recursive https://github.com/davidhalter/jedi-vim.git
 # cd jedi-vim
