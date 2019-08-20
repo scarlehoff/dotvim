@@ -1,9 +1,9 @@
 [submodule "pack/start/tabular"]
-	path = pack/start/tabular
+	path = pack/plugins/start/tabular
 	url = https://github.com/godlygeek/tabular.git
 [submodule "pack/start/vimtex"]
-	path = pack/start/vimtex
+	path = pack/plugins/start/vimtex
 	url = https://github.com/lervag/vimtex.git
 [submodule "pack/start/vim-kalisi"]
-	path = pack/start/vim-kalisi
+	path = pack/plugins/start/vim-kalisi
 	url = https://github.com/freeo/vim-kalisi

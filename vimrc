@@ -6,10 +6,6 @@ colorscheme kalisi " Best color scheme out there, desert, but using a different 
 " > Global options
 "
 set nocompatible
-let g:pathogen_disabled = ["syntastic.vim"]
-execute pathogen#infect()
-
-" execute pathogen#helptags() " Update helptags
 let myfiletypefile = "~/.vim/myfiletypes.vim"
 filetype plugin on " Use filetype plugins
 syntax on          " Syntax highlighting on
@@ -25,7 +21,6 @@ autocmd FileType bib setlocal isk+=: " very useful for using labels in the form 
 autocmd FileType js setlocal isk+=- " very useful for using labels in the form eq:blabla in latex!
 let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
 let g:vimtex_view_method = 'zathura' " Now needs to be set here instead of in tex.vim? why?
-let g:completor_tex_omni_trigger = g:vimtex#re#deoplete
 set hidden
 
 "
@@ -169,7 +164,9 @@ autocmd BufReadPost *
      \ endif
 set viminfo^=% " Remember info about open buffers on close
 
-
+" Open in new tab when doing gf
+nnoremap gf <C-W>gf
+vnoremap gf <C-W>gf
 
 
 "
@@ -214,176 +211,3 @@ hi MatchParen ctermbg=0 ctermfg=200
 "
 " Tabular:
 vnoremap <F3> :Tab /=<CR> 
-
-" NERDTree
-" Surely there must be an easier way...
-" This function makes NERDTree highlight on whatever file you happened to be
-" when it opens and, if it is already opened, every time you change buffer
-" and, contrary to other internet solutions, it let you close nerdtree...
-let g:nerdTreeOpen=0
-nmap <F7> :call CustomNERDTreeToggle() <CR>
-function! CustomNERDTreeToggle() 
-    let g:nerdTreeOpen=0
-    let s:isNerdTreeActive=exists("t:NERDTreeBufName")
-    if (s:isNerdTreeActive)
-        let s:isNerdTreeShown=bufwinnr(t:NERDTreeBufName)
-        if (s:isNerdTreeShown != -1) 
-            NERDTreeClose
-        else
-            NERDTreeFind
-            wincmd p
-            let g:nerdTreeOpen=1
-        endif
-    else
-        NERDTreeFind
-        wincmd p
-        let g:nerdTreeOpen=1
-    endif
-endfunction
-autocmd BufEnter * if (&modifiable && g:nerdTreeOpen) | NERDTreeFind | wincmd p | endif
-
-" Open nerdtree when openning a new directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-" Close vim when only nerdtree is left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
-" RainbowParentheses:
-nmap <F9> :RainbowParenthesesToggle <CR>
-
-" Fugitive: (:Gdiff, :Gstatus)
-" Open the quickfix list after :Ggrep (or any grep actually)
-autocmd QuickFixCmdPost *grep* cwindow
-nmap <F6> :Gstatus <CR>
-
-" ALE Asynchronous Lint Engine
-"  let g:ale_linters = {
-"  \ 'python' : ['pylint'],
-"  \}
-let g:ale_enabled = 0
-nmap <F8> :ALEToggle <CR>
-
-set completeopt-=preview
-
-
-" Eventually I will move everything to ALE
-"  set statusline+=%{SyntasticStatuslineFlag()}
-"  set statusline+=%*
-"  let g:syntastic_always_populate_loc_list =  1
-"  let g:syntastic_auto_loc_list            =  0
-"  let g:syntastic_check_on_open            =  0
-"  let g:syntastic_check_on_wq              =  1
-"  let g:syntastic_mode_map                 =  { 'mode': 'passive', 'active_filetypes': ["tex"],'passive_filetypes': [] }
-"  nmap <F8> :SyntasticToggleMode <CR>
-"   
-
-" Completor
-" For jedi-vim: don't show the docstring window automatically 
-autocmd FileType python setlocal completeopt-=preview
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_auto_trigger = 1 " Don't activate completor by default! 
-function! CompletorToggle()
-    if (g:completor_auto_trigger == 0)
-        let g:completor_auto_trigger = 1
-    else
-        let g:completor_auto_trigger = 0
-    endif
-endfunction
-noremap <C-@> :call CompletorToggle() <CR>
-inoremap <C-@> <c-o>:call CompletorToggle()<CR>
-
-noremap <s-k> :call completor#do('doc')<CR>
-noremap <c-d> :call completor#do('definition')<CR>
-let g:completor_complete_options = 'menuone,noselect'
-
-
-
-
-" vim-gfm-syntax (vim github markdown)
-" let g:gfm_syntax_emoji_conceal=1
-
-
-
-
-
-
-
-"
-"
-"
-" > Plugin graveyard
-"
-"
-"
-  
-" " 
-" Defaults: (already set like this by vim)
-" > Apparience
-" set laststatus=1   " 2 gives more info but uses an extra line...
-" set statusline=%F%m%r%h%w\ %{&ff}\ %y\ [L%l,C%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} "Easy peasy
-" > Performance
-" set ttyfast    " Improves performance in tmux
-" > Wrapping
-" set wrap      " wrap does the wrapping visually instead of changing the buffer
-" set nolist    " When text is wrapped don't create a new line
-" set encoding=utf-8 " Yes, that
-" set nobackup       " Don't keep backups
-" set foldlevel=0       " Fold it all!
-" set foldlevelstart=99 "Open file unfolded
-" "
-
-
-
-
-
-"  "
-"  " > Find stuff function
-"  "
-"  nmap gf <c-w>gF
-"  nmap gF :call GoToFunction()<cR>
-"  function! GoToFunction()
-"      let selWord   = shellescape(expand("<cword>"))
-"      let pythoncmd = $vimprobe . ' ' .selWord
-"  
-"      let l:list      = system(pythoncmd)
-"      let l:listFiles = split(l:list, "\n")
-"      " Hopefully we only found one
-"      " but we might not be that lucky
-"      let l:num = len(listFiles)
-"      let l:i   = 1
-"      let l:str = ""
-"      while l:i <= l:num
-"          let l:str = l:str . l:i . " " . l:listFiles[l:i-1] . "\n"
-"          let l:i   = l:i + 1
-"      endwhile
-"      " Now select file
-"      if l:num < 1
-"          echo "No file found for ".selWord
-"          echo pythoncmd
-"          return
-"      elseif l:num != 1
-"          echo l:str
-"          let l:input=input("Which?\n")
-"          if strlen(l:input)==0
-"              return
-"          endif
-"          if strlen(substitute(l:input, "[0-9]", "", "g"))>0
-"              echo "Not a number"
-"              return
-"          endif
-"          if l:input <1 || l:input>l:num
-"              echo "Fuck off"
-"              return
-"          endif
-"          let l:line = l:listFiles[l:input-1]
-"      else
-"          let l:line = l:list
-"      endif
-"      " And now open a new tab!
-"      execute "tabe ".l:line
-"  endfunction
-"  
-"  
-"  
