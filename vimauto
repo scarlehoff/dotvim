@@ -1,3 +1,17 @@
 #!/bin/bash
 
 git pull --recurse-submodules
+
+# I am using coc.nvim now, so I need to install some extra stuff to make full use of the completion engine
+if pacman -Q python-language-server 2&> /dev/null
+then
+    sudo pacman -S python-language-server
+fi
+
+# Install all coc extensions: https://github.com/neoclide/coc.nvim
+echo "Installing vim coc extensions..."
+for i in python vimtex json yaml highlight texlab html
+do
+    echo "Installing coc-${i}"
+    vim -c "CocInstall coc-${i}" -c q
+done
