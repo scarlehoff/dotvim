@@ -10,7 +10,7 @@ fi
 
 # Install all coc extensions: https://github.com/neoclide/coc.nvim
 echo "Installing vim coc extensions..."
-for i in python vimtex json yaml highlight texlab html
+for i in python vimtex json yaml highlight html tsserver
 do
     echo "Installing coc-${i}"
     vim -c "CocInstall coc-${i}" -c q
