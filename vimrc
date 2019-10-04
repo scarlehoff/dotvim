@@ -158,6 +158,11 @@ if has("gui_running")
 endif
 
 "
+" > If we forgot to use sudo to open a file
+" 
+cmap w!! w !sudo tee > /dev/null %
+
+"
 " > Return to last known position when opening files
 " 
 autocmd BufReadPost *

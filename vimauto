@@ -1,17 +1,30 @@
 #!/bin/bash
 
-git pull --recurse-submodules
+install_package() {
+    echo "Installing $1"
+    if pacman -Q $1 &> /dev/null
+    then
+        echo "$1 already installed"
+    else
+        yay -S $1 
+    fi
+}
 
-# I am using coc.nvim now, so I need to install some extra stuff to make full use of the completion engine
-if pacman -Q python-language-server 2&> /dev/null
-then
-    sudo pacman -S python-language-server
-fi
+
+# Install language servers for coc.nvim
+for i in python-language-server ccls
+do
+    install_package $i
+done
+
+# Initialize all submodules
+git submodule update --init --recursive
+git pull --recurse-submodules
 
 # Install all coc extensions: https://github.com/neoclide/coc.nvim
 echo "Installing vim coc extensions..."
 for i in python vimtex json yaml highlight html tsserver
 do
     echo "Installing coc-${i}"
-    vim -c "CocInstall coc-${i}" -c q
+    vim -c ":CocInstall coc-${i}" -c q
 done
