@@ -244,3 +244,27 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" NERDtree
+" Opens Nerdtree when pressing F7 and highlights the fiel you are on, press
+" again and it closes
+let g:nerdTreeOpen=0
+nmap <F7> :call CustomNERDTreeToggle() <CR>
+function! CustomNERDTreeToggle() 
+    let g:nerdTreeOpen=0
+    let s:isNerdTreeActive=exists("t:NERDTreeBufName")
+    if (s:isNerdTreeActive)
+        let s:isNerdTreeShown=bufwinnr(t:NERDTreeBufName)
+        if (s:isNerdTreeShown != -1) 
+            NERDTreeClose
+        else
+            NERDTreeFind
+            wincmd p
+            let g:nerdTreeOpen=1
+        endif
+    else
+        NERDTreeFind
+        wincmd p
+        let g:nerdTreeOpen=1
+    endif
+endfunction

@@ -14,3 +14,6 @@
 [submodule "pack/plugins/start/vim-opencl"]
 	path = pack/plugins/start/vim-opencl
 	url = git://github.com/petRUShka/vim-opencl.git
+[submodule "pack/plugins/start/nerdtree"]
+	path = pack/plugins/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
