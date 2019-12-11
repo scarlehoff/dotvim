@@ -1,83 +1,30 @@
 #!/bin/bash
 
-
-# Install pathogen
-# This is just to help managing plugins
-mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-if [[ "$1" = "update" ]]
-then
-    for i in ~/.vim/bundle/*
-    do
-        echo "Updating $i"
-        cd $i
-        git pull
-        cd -
-    done
-    exit 0
-fi
-
-# Link vimrc to .vimrc
-ln -s $PWD/vimrc $HOME/.vimrc
-
-# 
-# All plugins
-#
-
-cd ~/.vim/bundle
-
-# Kalisi color scheme
-git clone https://github.com/freeo/vim-kalisi
-# Vimtex
-git clone https://github.com/lervag/vimtex.git
-if [[ ! $(command -v zathura) ]]
-then
-    echo "Zathura is needed to use the synctex capabilities of vimtex"
-fi
-# # Syntastic (it requires syntax checkers, duh!)
-# git clone  https://github.com/scrooloose/syntastic.git
-# Tabular (text aligner)
-git clone git://github.com/godlygeek/tabular.git
-# Rainbow Parentheses
-git clone https://github.com/kien/rainbow_parentheses.vim
-
-# Fastfold
-git clone https://github.com/Konfekt/FastFold.git
-# Nerdtree  (and git support)
-git clone https://github.com/scrooloose/nerdtree.git
-git clone https://github.com/jistr/vim-nerdtree-tabs.git
-# # Snippets
-# git clone https://github.com/tomtom/tlib_vim.git
-# git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
-# git clone https://github.com/garbas/vim-snipmate.git
-# git clone https://github.com/honza/vim-snippets.git
-
-# FuGITive
-git clone git://github.com/tpope/vim-fugitive.git
-vim -u NONE -c "helptags vim-fugitive/doc" -c q
-
-# Machit
-git clone https://github.com/codescv/vim-matchit
-
-# ALE for linting
-git clone https://github.com/w0rp/ale.git
+install_package() {
+    echo "Installing $1"
+    if pacman -Q $1 &> /dev/null
+    then
+        echo "$1 already installed"
+    else
+        yay -S $1 
+    fi
+}
 
 
-# # Pydoc
-# git clone https://github.com/fs111/pydoc.vim.git
+# Install language servers for coc.nvim
+for i in python-language-server ccls
+do
+    install_package $i
+done
 
-# # Completor
-git clone https://github.com/maralla/completor.vim.git
-cd completor.vim
-make js
-cd -
-# # Jedi-vim
-# git clone --recursive https://github.com/davidhalter/jedi-vim.git
-# cd jedi-vim
-# git submodule update --init
+# Initialize all submodules
+git submodule update --init --recursive
+git pull --recurse-submodules
 
-
-# Github Markdown
-git clone https://github.com/rhysd/vim-gfm-syntax.git
-
-# React Highligting 
+# Install all coc extensions: https://github.com/neoclide/coc.nvim
+echo "Installing vim coc extensions..."
+for i in python vimtex json yaml highlight html tsserver
+do
+    echo "Installing coc-${i}"
+    vim -c ":CocInstall coc-${i}" -c q
+done
