@@ -17,3 +17,9 @@
 [submodule "pack/plugins/start/nerdtree"]
 	path = pack/plugins/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "pack/plugins/start/vim-pug"]
+	path = pack/plugins/start/vim-pug
+	url = git://github.com/digitaltoad/vim-pug.git
+[submodule "pack/plugins/start/vim-stylus"]
+	path = pack/plugins/start/vim-stylus
+	url = git://github.com/wavded/vim-stylus.git
