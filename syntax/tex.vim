@@ -29,8 +29,6 @@ if !executable('latexmk')
     let g:vimtex_compiler_enabled = 0
 endif
 
-" Don't open a window on warnings!
-let g:vimtex_quickfix_open_on_warning = 0
 
 " Vimtex keybinds
 nnoremap <leader>cw :VimtexCountWords <CR> 
@@ -53,4 +51,5 @@ let g:syntastic_quiet_messages = {
         \]
 \}
 
-
+" Don't open a window on warnings!
+let g:vimtex_quickfix_open_on_warning = 0
