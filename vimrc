@@ -109,6 +109,8 @@ iab pritn print
 " Make > and < stay after use
 vmap > >gv
 vmap < <gv
+" Make <F8> highlight the current word
+nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 
 "
