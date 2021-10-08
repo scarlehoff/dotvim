@@ -24,4 +24,4 @@ git pull --recurse-submodules
 # Install all coc extensions: https://github.com/neoclide/coc.nvim 
 # Todo: try esbonio
 echo "Installing vim coc extensions..."
-vim -c ":CocInstall coc-jedi coc-vimtex coc-json coc-yaml coc-highlight coc-html coc-tsserver coc-cmake coc-css coc-git coc-nginx coc-rls coc-rome coc-sh"
+vim -c ":CocInstall coc-pyright coc-vimtex coc-json coc-yaml coc-highlight coc-html coc-tsserver coc-cmake coc-css coc-git coc-nginx coc-rls coc-rome coc-sh"
