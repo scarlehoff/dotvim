@@ -12,7 +12,7 @@ install_package() {
 
 
 # Install language servers for coc.nvim
-for i in python-language-server ccls
+for i in ccls
 do
     install_package $i
 done

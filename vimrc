@@ -279,3 +279,5 @@ function! CustomNERDTreeToggle()
         let g:nerdTreeOpen=1
     endif
 endfunction
+
+autocmd FileType python let b:coc_root_patterns = ['.pyrightconfig.json']

@@ -1,22 +1,27 @@
 {
-  "coc.source.around.enable" : true,
-  "python.linting.enabled": true,
-  "suggest.minTriggerInputLength": 4,
-  "languageserver": {
-     "fortran": {
-       "command": "fortls",
-       "filetypes": ["fortran"],
-       "rootPatterns": [".fortls", ".git/"]
-     },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "cuda", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
+    "coc.source.around.enable" : true,
+    "python.linting.pylintEnabled": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportGeneralTypeIssues": "warning",
+        "reportMissingTypeStubs": "none"
+    },
+    "suggest.minTriggerInputLength": 4,
+    "languageserver": {
+        "fortran": {
+            "command": "fortls",
+            "filetypes": ["fortran"],
+            "rootPatterns": [".fortls", ".git/"]
+        },
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "cuda", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
     }
-  }
 }
