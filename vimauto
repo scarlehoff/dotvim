@@ -21,6 +21,11 @@ done
 git submodule update --init --recursive
 git pull --recurse-submodules
 
+# Install the dependencies of coc
+cd pack/plugins/start/coc.nvim/
+npm install
+cd -
+
 # Install all coc extensions: https://github.com/neoclide/coc.nvim 
 # Todo: try esbonio
 echo "Installing vim coc extensions..."
