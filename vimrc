@@ -1,6 +1,10 @@
 " Do colorscheme first to allow for it to be changed by plugins
 set t_Co=256       " Use the terminal wit 256 colors
-colorscheme kalisi " Best color scheme out there, desert, but using a different one now, eh
+colorscheme kalisi " Other good color schemeS: desert
+if !has("gui_running")
+    " transparent bg
+    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+endif
 
 "
 " > Global options
