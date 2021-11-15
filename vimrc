@@ -1,7 +1,10 @@
 " Do colorscheme first to allow for it to be changed by plugins
 set t_Co=256       " Use the terminal wit 256 colors
-colorscheme kalisi " Other good color schemeS: desert
-if !has("gui_running")
+colorscheme kalisi " Other good color schemes: desert
+if has("gui_running")
+    " remove menubar
+    set guioptions -=m
+else
     " transparent bg
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 endif
@@ -108,6 +111,9 @@ map "ss :setlocal spell!<CR>
 " F5 inserts date and my name
 nnoremap <F5> "=strftime(" J CM, %d-%b-%Y")<CR>P
 inoremap <F5> <C-R>=strftime(" J CM, %d-%b-%Y") J CM<CR>
+" F6 only date
+nnoremap <F6> "=strftime("%d-%m-%Y")<CR>P
+inoremap <F6> <C-R>=strftime("%d-%m-%Y")<CR>
 " pritn -> print
 iab pritn print
 " Make > and < stay after use
