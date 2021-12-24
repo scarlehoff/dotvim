@@ -2,4 +2,3 @@ bundle
 autoload
 *.orig
 .netrwhist
-*.spl
