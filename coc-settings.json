@@ -15,8 +15,14 @@
         },
         "ccls": {
             "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "cuda", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"]
+            "filetypes": ["c", "C", "cpp", "objc", "cuda", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "workspaceFolders": ["/tmp/ccls"],
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
         }
     }
 }
