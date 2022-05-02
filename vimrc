@@ -13,6 +13,7 @@ endif
 " > Global options
 "
 set nocompatible
+set encoding=utf-8
 let myfiletypefile = "~/.vim/myfiletypes.vim"
 filetype plugin on " Use filetype plugins
 syntax on          " Syntax highlighting on
@@ -31,14 +32,14 @@ autocmd FileType bib setlocal isk+=: " very useful for using labels in the form 
 let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
 let g:vimtex_view_method = 'zathura' " Now needs to be set here instead of in tex.vim? why?
 let g:vimtex_compiler_latexmk = {
-    \ 'options' : [
-    \   '-shell-escape',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-    \}
+            \ 'options' : [
+                \   '-shell-escape',
+                \   '-verbose',
+                \   '-file-line-error',
+                \   '-synctex=1',
+                \   '-interaction=nonstopmode',
+                \ ],
+                \}
 set hidden
 
 "
@@ -231,13 +232,51 @@ highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Re
 hi MatchParen ctermbg=0 ctermfg=200 
 
 "
+" > vim-plug
+" note for the future: look into using conditions in the pluging loading for
+" different extensions on mac
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin()
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'preservim/nerdtree', { 'on': 'NERDTreeFind'} |
+            \ Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'xuyuanp/nerdtree-git-plugin'
+    Plug 'lervag/vimtex', {'for': ['latex', 'tex', 'bib']}
+    Plug 'digitaltoad/vim-pug', { 'for': ['pug'] }
+    Plug 'freeo/vim-kalisi' "colorscheme
+    Plug 'godlygeek/tabular', {'on': 'Tab'}
+call plug#end()
+
+
+"
 " > Plugin Settings
 "
 "
-" Tabular:
+" >> Tabular:
 vnoremap <F3> :Tab /=<CR> 
-" coc.nvim
-" You will have bad experience for diagnostic messages when it's default 4000.
+
+" >> Coc.nvim:
+" >>> Extensions:
+" esbonio is for rst/sphinx and rome for js, ts, json, html, md and css
+" clangd might need :CocCommand clangd.install from a C-file
+let g:coc_global_extensions = [
+  \ 'coc-esbonio',
+  \ 'coc-pyright',
+  \ 'coc-vimtex',
+  \ 'coc-yaml',
+  \ 'coc-rome',
+  \ 'coc-highlight',
+  \ 'coc-git',
+  \ 'coc-sh',
+  \ 'coc-rust-analyzer',
+  \ 'coc-clangd',
+  \ ]
+
+" You will have bad experience for diagnostic messages when it uses the default 4000.
 set updatetime=300
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -249,23 +288,22 @@ function! s:show_documentation()
     endif
 endfunction
 " always show signcolumns
-set signcolumn=yes
+set signcolumn=number
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" NERDtree
-" Opens Nerdtree when pressing F7 and highlights the fiel you are on, press
-" again and it closes
+" >> NERDtree:
+" Opens Nerdtree when pressing F7 and highlights the file you are on, press it again to close
 let g:nerdTreeOpen=0
 nmap <F7> :call CustomNERDTreeToggle() <CR>
 function! CustomNERDTreeToggle() 
