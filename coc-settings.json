@@ -8,6 +8,12 @@
     },
     "suggest.minTriggerInputLength": 4,
     "languageserver": {
+        "bash": {
+        "command": "bash-language-server",
+        "args": ["start"],
+        "filetypes": ["sh"],
+        "ignoredRootPaths": ["~"]
+        },
         "fortran": {
             "command": "fortls",
             "filetypes": ["fortran"],
