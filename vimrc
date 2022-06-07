@@ -22,6 +22,7 @@ set mouse=a        " Allow use of the mouse
 if !has("nvim")
     set ttymouse=sgr   " Fix the problem with the mouse past column 220
 endif
+set mmp=5000      " Fix the problem I have sometimes in markdown since I have memory to spare
 set re=1
 set showcmd        " Show incomplete commands during input
 set history=1000   " How many lines of history VIM should remember
