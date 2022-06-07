@@ -51,5 +51,11 @@ let g:syntastic_quiet_messages = {
         \]
 \}
 
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Underfull',
+      \ 'Overfull',
+      \ 'hyperref',
+      \]
+
 " Don't open a window on warnings!
 let g:vimtex_quickfix_open_on_warning = 0

@@ -271,7 +271,6 @@ let g:coc_global_extensions = [
   \ 'coc-rome',
   \ 'coc-highlight',
   \ 'coc-git',
-  \ 'coc-sh',
   \ 'coc-rust-analyzer',
   \ 'coc-clangd',
   \ ]
