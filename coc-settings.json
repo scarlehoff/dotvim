@@ -4,7 +4,10 @@
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.diagnosticSeverityOverrides": {
         "reportGeneralTypeIssues": "warning",
-        "reportMissingTypeStubs": "none"
+        "reportMissingTypeStubs": "none",
+        "reportOptionalCall": "none",
+        "reportOptionalMemberAccess": "none",
+        "reportOptionalSubscript": "none"
     },
     "suggest.minTriggerInputLength": 4,
     "languageserver": {
