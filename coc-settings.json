@@ -1,6 +1,6 @@
 {
     "coc.source.around.enable" : true,
-    "python.linting.pylintEnabled": true,
+    "python.linting.pylintEnabled": false,
     "python.analysis.typeCheckingMode": "basic",
     "pyright.disableProgressNotifications": true,
     "pyright.disableProgressWindow": true,
