@@ -250,6 +250,7 @@ call plug#begin()
     Plug 'digitaltoad/vim-pug', { 'for': ['pug'] }
     Plug 'freeo/vim-kalisi' "colorscheme
     Plug 'godlygeek/tabular', {'on': 'Tab'}
+    Plug 'dkarter/bullets.vim'
 call plug#end()
 
 
