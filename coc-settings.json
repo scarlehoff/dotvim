@@ -1,9 +1,12 @@
 {
     "coc.source.around.enable" : true,
-    "python.linting.pylintEnabled": false,
-    "python.analysis.typeCheckingMode": "basic",
     "pyright.disableProgressNotifications": true,
     "pyright.disableProgressWindow": true,
+    "pyright.completion.importsupport": false,
+    "pyright.completion.snippetSupport": false,
+    "python.analysis.autoImportCompletions": false,
+    "python.linting.pylintEnabled": false,
+    "python.analysis.typeCheckingMode": "basic",
     "python.analysis.diagnosticSeverityOverrides": {
         "reportGeneralTypeIssues": "warning",
         "reportMissingTypeStubs": "none",
