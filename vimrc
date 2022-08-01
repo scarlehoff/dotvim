@@ -251,6 +251,7 @@ call plug#begin()
     Plug 'freeo/vim-kalisi' "colorscheme
     Plug 'godlygeek/tabular', {'on': 'Tab'}
     Plug 'dkarter/bullets.vim'
+    Plug 'junegunn/fzf.vim'
 call plug#end()
 
 
@@ -260,6 +261,14 @@ call plug#end()
 "
 " >> Tabular:
 vnoremap <F3> :Tab /=<CR> 
+
+" >> fzf.vim
+noremap <F4> :Rg<CR>
+let g:fzf_action = {
+    \ 'enter': 'tab split',
+    \ 'ctrl-h': 'split',
+    \ 'ctrl-v': 'vsplit'
+    \}
 
 " >> Coc.nvim:
 " >>> Extensions:
