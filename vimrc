@@ -279,12 +279,15 @@ let g:coc_global_extensions = [
   \ 'coc-pyright',
   \ 'coc-vimtex',
   \ 'coc-yaml',
-  \ 'coc-rome',
+  \ 'coc-tsserver',
   \ 'coc-highlight',
   \ 'coc-git',
   \ 'coc-rust-analyzer',
   \ 'coc-clangd',
   \ ]
+
+highlight CocFloating ctermbg=DarkGray
+set pumheight=5 " Avoid having 3 thousand items in the completion list
 
 " You will have bad experience for diagnostic messages when it uses the default 4000.
 set updatetime=500

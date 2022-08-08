@@ -14,7 +14,9 @@
         "reportOptionalMemberAccess": "none",
         "reportOptionalSubscript": "none"
     },
-    "suggest.minTriggerInputLength": 4,
+    "suggest.minTriggerInputLength": 8,
+    "suggest.autoTrigger": "trigger",
+    "suggest.snippetsSupport": false,
     "languageserver": {
         "bash": {
         "command": "bash-language-server",
