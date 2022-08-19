@@ -1,6 +1,6 @@
 " Do colorscheme first to allow for it to be changed by plugins
 set t_Co=256       " Use the terminal wit 256 colors
-colorscheme kalisi " Other good color schemes: desert
+colorscheme kalisi
 if has("gui_running")
     " remove menubar
     set guioptions -=m
@@ -286,7 +286,8 @@ let g:coc_global_extensions = [
   \ 'coc-clangd',
   \ ]
 
-highlight CocFloating ctermbg=DarkGray
+hi CocFloating ctermbg=darkgray ctermfg=white
+hi CocMenuSel ctermbg=82 ctermfg=black
 set pumheight=5 " Avoid having 3 thousand items in the completion list
 
 " You will have bad experience for diagnostic messages when it uses the default 4000.
