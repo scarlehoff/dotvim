@@ -242,7 +242,6 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin()
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'preservim/nerdtree', { 'on': 'NERDTreeFind'} |
             \ Plug 'Xuyuanp/nerdtree-git-plugin'
     Plug 'xuyuanp/nerdtree-git-plugin'
@@ -252,6 +251,7 @@ call plug#begin()
     Plug 'godlygeek/tabular', {'on': 'Tab'}
     Plug 'dkarter/bullets.vim'
     Plug 'junegunn/fzf.vim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 

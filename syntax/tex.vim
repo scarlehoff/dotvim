@@ -1,6 +1,6 @@
 nnoremap <leader>cc :call ConcealToggle()<CR> 
 " leader = \, \ll to autocompile latex
-colorscheme kalisi
+" colorscheme kalisi
 " Fix the annoying behaviour of Kalisi with matching
 hi MatchParen ctermbg=0 ctermfg=200 
 function! ConcealToggle()
