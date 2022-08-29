@@ -322,6 +322,7 @@ endfunction
 
 " >> NERDtree:
 " Opens Nerdtree when pressing F7 and highlights the file you are on, press it again to close
+" Press t to open a new tab
 let g:nerdTreeOpen=0
 nmap <F7> :call CustomNERDTreeToggle() <CR>
 function! CustomNERDTreeToggle() 
