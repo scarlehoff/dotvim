@@ -284,7 +284,9 @@ let g:coc_global_extensions = [
   \ 'coc-git',
   \ 'coc-rust-analyzer',
   \ 'coc-clangd',
+  \ 'coc-snippets',
   \ ]
+
 
 hi CocFloating ctermbg=darkgray ctermfg=white
 hi CocMenuSel ctermbg=82 ctermfg=black
@@ -307,6 +309,8 @@ inoremap <silent><expr> <TAB>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" Select the snippet con ctrl+j
+"imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 "  inoremap <silent><expr> <TAB>
