@@ -6,7 +6,9 @@
     "pyright.completion.snippetSupport": false,
     "python.analysis.autoImportCompletions": false,
     "python.linting.pylintEnabled": false,
-    "python.analysis.typeCheckingMode": "basic",
+    "pyright.inlayHints.enable": false,
+    "pyright.inlayHints.functionReturnTypes": false,
+    "python.analysis.typeCheckingMode": false,
     "python.analysis.diagnosticSeverityOverrides": {
         "reportGeneralTypeIssues": "warning",
         "reportMissingTypeStubs": "none",
@@ -14,8 +16,7 @@
         "reportOptionalMemberAccess": "none",
         "reportOptionalSubscript": "none"
     },
-    "suggest.minTriggerInputLength": 8,
-    "suggest.autoTrigger": "trigger",
+    "suggest.minTriggerInputLength": 5,
     "suggest.snippetsSupport": false,
     "languageserver": {
         "bash": {
