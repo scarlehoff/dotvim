@@ -98,6 +98,7 @@ noremap ty "+y
 noremap tY "+Y
 noremap tp "+p
 noremap tP "+P
+" paste decently within tmux
 set pastetoggle=<F10>
 " disable recording
 map q <Nop> 
