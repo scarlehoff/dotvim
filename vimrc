@@ -293,6 +293,12 @@ hi CocFloating ctermbg=darkgray ctermfg=white
 hi CocMenuSel ctermbg=82 ctermfg=black
 set pumheight=5 " Avoid having 3 thousand items in the completion list
 
+" will open the new definition in a vertical split through the config: coc.preferences.jumpCommand": "vsp"
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 " You will have bad experience for diagnostic messages when it uses the default 4000.
 set updatetime=500
 " always show signcolumns
