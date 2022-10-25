@@ -291,6 +291,7 @@ let g:coc_global_extensions = [
 
 hi CocFloating ctermbg=darkgray ctermfg=white
 hi CocMenuSel ctermbg=82 ctermfg=black
+hi CocWarningFloat ctermfg=173 ctermbg=240 guifg=#ff922b
 set pumheight=5 " Avoid having 3 thousand items in the completion list
 
 " will open the new definition in a vertical split through the config: coc.preferences.jumpCommand": "vsp"
