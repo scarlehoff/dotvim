@@ -270,6 +270,8 @@ let g:fzf_action = {
     \ 'ctrl-h': 'split',
     \ 'ctrl-v': 'vsplit'
     \}
+" This might be needed for MacOs
+set rtp+=/opt/homebrew/opt/fzf
 
 " >> Coc.nvim:
 " >>> Extensions:
