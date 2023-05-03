@@ -68,6 +68,7 @@ set hlsearch   " Highlight search patterns
 set incsearch  " Show 'best mach so far' as you type
 set ignorecase " Ignore case of letter on searches unless..
 set smartcase  " Overrides 'ignorecase' if the search pattern contains upper and lowe case letters
+" Sometimes it is useful to do "search under the cursor" but without moving the cursor : nnoremap * *N
 
 "
 " > Wrapping Settings
@@ -224,6 +225,7 @@ function! VisualSelection(direction) range
 endfunction
 
 autocmd BufRead,BufNewFile *.run set filetype=nnlojet
+autocmd BufRead,BufNewFile *.mdx set filetype=markdown
 
 
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
@@ -271,7 +273,10 @@ let g:fzf_action = {
     \ 'ctrl-v': 'vsplit'
     \}
 " This might be needed for MacOs
-set rtp+=/opt/homebrew/opt/fzf
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    set rtp+=/opt/homebrew/opt/fzf
+endif
 
 " >> Coc.nvim:
 " >>> Extensions:
@@ -290,10 +295,10 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ ]
 
-
-hi CocFloating ctermbg=darkgray ctermfg=white
+"maybe darkgray?
+hi CocFloating ctermbg=gray ctermfg=white
 hi CocMenuSel ctermbg=82 ctermfg=black
-hi CocWarningFloat ctermfg=173 ctermbg=240 guifg=#ff922b
+hi CocWarningFloat ctermfg=193 ctermbg=240 guifg=#ff922b
 set pumheight=5 " Avoid having 3 thousand items in the completion list
 
 " will open the new definition in a vertical split through the config: coc.preferences.jumpCommand": "vsp"

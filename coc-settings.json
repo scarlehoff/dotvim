@@ -20,11 +20,11 @@
     "suggest.snippetsSupport": false,
     "languageserver": {
         "bash": {
-        "command": "bash-language-server",
-        "args": ["start"],
-        "filetypes": ["sh"],
-        "ignoredRootPaths": ["~"]
-        },
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
+            },
         "fortran": {
             "command": "fortls",
             "filetypes": ["fortran"],
@@ -32,5 +32,5 @@
         }
     },
     "rust-analyzer.server.path": "rust-analyzer",
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.0/clangd_14.0.0/bin/clangd"
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
 }
