@@ -1,0 +1,12 @@
+snippet /argparse "Argument to start a python script with argument parser" bA
+#!/usr/bin/env python
+
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+
+parser.add_argument("ARG")
+
+args = parser.parse_args()
+
+endsnippet
