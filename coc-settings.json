@@ -17,7 +17,8 @@
         "reportOptionalSubscript": "none"
     },
     "suggest.minTriggerInputLength": 5,
-    "suggest.snippetsSupport": false,
+    "suggest.selection": "first",
+    "suggest.enablePreselect": false,
     "languageserver": {
         "bash": {
             "command": "bash-language-server",
@@ -31,6 +32,5 @@
             "rootPatterns": [".fortls", ".git/"]
         }
     },
-    "rust-analyzer.server.path": "rust-analyzer",
-    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/16.0.2/clangd_16.0.2/bin/clangd"
+    "clangd.path": "/usr/bin/clangd"
 }
