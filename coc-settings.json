@@ -32,5 +32,9 @@
             "rootPatterns": [".fortls", ".git/"]
         }
     },
-    "clangd.path": "/usr/bin/clangd"
+    "clangd.path": "/usr/bin/clangd",
+    "rust-analyzer": {
+        "disableProgressNotifications": true,
+        "updates.checkOnStartup": false
+    }
 }
