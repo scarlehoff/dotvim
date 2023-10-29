@@ -18,6 +18,7 @@ if !has("nvim") | set ttymouse=sgr | endif   " Fix the problem with the mouse pa
 set mmp=10000      " Allow more memory (x10) for pattern matching (useful in markdown)
 set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
+set backspace=indent,eol,start " Allow backspace to also remove lines
 
 "
 " > Global Folding Settings (zc, zo, za)
@@ -37,6 +38,7 @@ set shiftround    " Round indent to multiple of shiftwidth
 set shiftwidth=4
 set tabstop=4     " Number of spaces <tab>s in file counts
 set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
+
 
 "
 " > Latex options
