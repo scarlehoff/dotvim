@@ -262,6 +262,7 @@ call plug#begin()
     Plug 'godlygeek/tabular', {'on': 'Tab'}
     Plug 'dkarter/bullets.vim'
     Plug 'junegunn/fzf.vim'
+    Plug 'ojroques/vim-oscyank', {'branch': 'main'}
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -279,6 +280,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" oscyank
+nmap <leader>c <Plug>OSCYankOperator
+nmap <leader>cc <leader>c_
+vmap <leader>c <Plug>OSCYankVisual
 
 
 "
@@ -365,3 +370,5 @@ function! CustomNERDTreeToggle()
         let g:nerdTreeOpen=1
     endif
 endfunction
+
+
