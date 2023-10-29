@@ -1,33 +1,46 @@
-" Do colorscheme first to allow for it to be changed by plugins
+"
+" > Colorscheme and visual options first to allow for plugins to change it
+"
 set t_Co=256       " Use the terminal wit 256 colors
 colorscheme kalisi
-if has("gui_running")
-    " remove menubar
-    set guioptions -=m
-else
-    " transparent bg
-    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
-endif
 
 "
 " > Global options
 "
-set nocompatible
 set encoding=utf-8
 let myfiletypefile = "~/.vim/myfiletypes.vim"
 filetype plugin on " Use filetype plugins
 syntax on          " Syntax highlighting on
 filetype indent on " Use filetype indent
 set mouse=a        " Allow use of the mouse
-if !has("nvim")
-    set ttymouse=sgr   " Fix the problem with the mouse past column 220
-endif
-set mmp=5000      " Fix the problem I have sometimes in markdown since I have memory to spare
-set re=1
 set showcmd        " Show incomplete commands during input
+if !has("nvim") | set ttymouse=sgr | endif   " Fix the problem with the mouse past column 220
+set mmp=10000      " Allow more memory (x10) for pattern matching (useful in markdown)
 set history=1000   " How many lines of history VIM should remember
 set tabpagemax=150 " Not just 10!
-set backspace=indent,eol,start " Have 'normal' backspace in insert mode
+
+"
+" > Global Folding Settings (zc, zo, za)
+"
+set foldmethod=syntax " Fold depending on the lang.
+set foldlevelstart=99 " Open file unfolded
+
+"
+" > Global Indentation options
+" 
+set autoindent    " Copy indent from current line when starting a new one
+set smartindent   " Try being clever for new-line indenting
+set expandtab     " Convert tab to spaces
+set smarttab      " When on a <tab>/<bs> will insert/<remove> blanks according to swhiftwidth
+set shiftround    " Round indent to multiple of shiftwidth
+" Fortran indentation will be different as per fortram.vim
+set shiftwidth=4
+set tabstop=4     " Number of spaces <tab>s in file counts
+set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
+
+"
+" > Latex options
+"
 autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 autocmd FileType bib setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
 let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
@@ -41,7 +54,9 @@ let g:vimtex_compiler_latexmk = {
                 \   '-interaction=nonstopmode',
                 \ ],
                 \}
-set hidden
+
+" set hidden <--- since I rarely use buffers I should not need this, but maybe
+" some plugin requires it?
 
 "
 " > Style
@@ -51,8 +66,38 @@ set ruler          " Show cursor position at the botton left
 set scrolloff=3    " Scroll when cursor get within 3 char of the top/bottom edge
 set sidescroll=1   " Left/right
 set laststatus=2   " (with 1 we can remove the white line below, config for that line v
-set statusline=%F%m%r%h%w\ %{&ff}\ %y\ [L%l,C%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} "Easy peasy
 set background=dark
+
+" Only-gvim options
+if has("gui_running")
+    set guioptions -=m " remove menubar
+    set guioptions-=T " Remove toolbar
+    set guioptions+=e " Add tab pages
+    set guitablabel=$M\ %t
+else
+    " transparent bg
+    autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+endif
+
+" vimdiff options
+highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
+highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+" Fix the annoying behaviour of Kalisi with matching
+hi MatchParen ctermbg=0 ctermfg=200 
+
+"
+" > Statusline definition
+"
+" Start with the full filepath
+set statusline+=%F
+" Decorate with flags: [modified?] [read only?] [is help?] [is preview?]
+set statusline+=%m%r%h%w
+" Add fileformat and type
+set statusline+=\ %{&ff}\ %y
+" Location within the file
+set statusline+=\ [L%l/%L,C%v][%p%%]
 
 "
 " > Performance Settings
@@ -92,57 +137,42 @@ set wildignore+=*.spl                          " Compiled spelling word list
 "
 " > Key Mapping
 "
-" clipboard control
-" ctrl + c == "+y i
-vnoremap <C-c> "+y i
+
+" F5 inserts date
+nnoremap <F5> "=strftime("%d-%b-%Y")<CR>P
+inoremap <F5> <C-R>=strftime("%d-%b-%Y")<CR>
+" F8 highlights the current word amd occurrences without moving
+nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" F10, enters paste mode
+set pastetoggle=<F10>
+" disable ex mode
+map Q <Nop> 
+" Remap vim 0 to first non-blank
+map 0 ^
+" make j and k navegate through wrapper text as seen in the screen
+nmap j gj
+nmap k gk
+" Toggle/untoggle spell checking (=z will give you a list of suggestions)
+map "ss :setlocal spell!<CR>
+" Make > and < stay after use
+vmap > >gv
+vmap < <gv
+" pritn -> print
+iab pritn print
+ 
+"
+" > Clipboard control
+"
+" Use t as a shorthand for using the system clipbard
 noremap ty "+y
 noremap tY "+Y
 noremap tp "+p
 noremap tP "+P
-" paste decently within tmux
-set pastetoggle=<F10>
-" disable recording
-map q <Nop> 
-" disable ex mode
-map Q <Nop>
-" make j and k behave as the should when navigating through wrapped text
-nmap j gj
-nmap k gk
-" Remap vim 0 to first non-blank
-map 0 ^
-" Toggle/untoggle spell checking (=z will give you a list of suggestions)
-map "ss :setlocal spell!<CR>
-" F5 inserts date
-nnoremap <F5> "=strftime("%d-%b-%Y")<CR>P
-inoremap <F5> <C-R>=strftime("%d-%b-%Y")<CR>
-" pritn -> print
-iab pritn print
-" Make > and < stay after use
-vmap > >gv
-vmap < <gv
-" Make <F8> highlight the current word
-nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
-
 
 "
-" > Global Folding Settings
-" > commented out, trying fastfold
-"
-set foldmethod=syntax " Fold depending on the lang.
-set foldlevelstart=99 "Open file unfolded
-
-"
-" > Global Indentation options
+" > If we forgot to use sudo to open a file
 " 
-set autoindent    " Copy indent from current line when starting a new one
-set smartindent   " Try being clever for new-line indenting
-set expandtab     " Convert tab to spaces
-set smarttab      " When on a <tab>/<bs> will insert/<remove> blanks according to swhiftwidth
-set shiftround    " Round indent to multiple of shiftwidth
-" Fortran indentation will be different as per fortram.vim
-set shiftwidth=4
-set tabstop=4     " Number of spaces <tab>s in file counts
-set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
+cmap w!! w !sudo tee > /dev/null %
 
 "
 " > Block commenting, all active for all lang
@@ -169,20 +199,6 @@ vnoremap @1 :s!^\!  !!<cr>:noh<cr>
 " Vim
 vnoremap ~" :s!^!"  !<cr>:noh<cr>
 vnoremap @" :s!^"  !!<cr>:noh<cr>
-
-"
-" > If we are using gvim, change a few things
-"
-if has("gui_running")
-    set guioptions-=T " Remove toolbar
-    set guioptions+=e " Add tab pages
-    set guitablabel=$M\ %t
-endif
-
-"
-" > If we forgot to use sudo to open a file
-" 
-cmap w!! w !sudo tee > /dev/null %
 
 "
 " > Return to last known position when opening files
@@ -224,18 +240,10 @@ function! VisualSelection(direction) range
     let @" = l:saved_reg
 endfunction
 
-autocmd BufRead,BufNewFile *.run set filetype=nnlojet
-autocmd BufRead,BufNewFile *.mdx set filetype=markdown
+" ######################################
+" > Plugins 
+" ######################################
 
-
-highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
-highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
-" Fix the annoying behaviour of Kalisi with matching
-hi MatchParen ctermbg=0 ctermfg=200 
-
-"
 " > vim-plug
 " note for the future: look into using conditions in the pluging loading for
 " different extensions on mac
@@ -257,16 +265,26 @@ call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
+"
+" > Triggers
+"
+" tabular:
+vnoremap <F3> :Tab /=<CR>
+" fzf:
+noremap <F4> :Rg<CR>
+" nerdtree:
+nmap <F7> :call CustomNERDTreeToggle() <CR>
+" coc.nvim (opens in a verticual split, coc.preferences.jumpCommand": "vsp")
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 "
 " > Plugin Settings
-"
-"
-" >> Tabular:
-vnoremap <F3> :Tab /=<CR> 
 
-" >> fzf.vim
-noremap <F4> :Rg<CR>
+" > fzf.vim
 let g:fzf_action = {
     \ 'enter': 'tab split',
     \ 'ctrl-h': 'split',
@@ -278,10 +296,10 @@ if os == "Darwin"
     set rtp+=/opt/homebrew/opt/fzf
 endif
 
-" >> Coc.nvim:
-" >>> Extensions:
+" > coc.nvim:
+" >> Extensions:
 " esbonio is for rst/sphinx and rome for js, ts, json, html, md and css
-" clangd might need :CocCommand clangd.install from a C-file
+" clangd might need :CocCommand clangd.install from a C-file to work
 let g:coc_global_extensions = [
   \ 'coc-esbonio',
   \ 'coc-pyright',
@@ -295,17 +313,11 @@ let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ ]
 
-"maybe darkgray?
+" change the colors for the floating menus, (maybe ctermbg could be darkgray)
 hi CocFloating ctermbg=gray ctermfg=white
 hi CocMenuSel ctermbg=82 ctermfg=black
 hi CocWarningFloat ctermfg=193 ctermbg=240 guifg=#ff922b
 set pumheight=5 " Avoid having 3 thousand items in the completion list
-
-" will open the new definition in a vertical split through the config: coc.preferences.jumpCommand": "vsp"
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
 
 " You will have bad experience for diagnostic messages when it uses the default 4000.
 set updatetime=500
@@ -324,26 +336,17 @@ inoremap <silent><expr> <TAB>
       \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-" Select the snippet con ctrl+j
-"imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-"  inoremap <silent><expr> <TAB>
-"              \ pumvisible() ? "\<C-n>" :
-"              \ <SID>check_back_space() ? "\<TAB>" :
-"              \ coc#refresh()
-"  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"  
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" >> NERDtree:
-" Opens Nerdtree when pressing F7 and highlights the file you are on, press it again to close
-" Press t to open a new tab
+autocmd FileType python let b:coc_root_patterns = ['.pyrightconfig.json']
+
+" > NERDtree:
+" Press t to open files in a new tab
 let g:nerdTreeOpen=0
-nmap <F7> :call CustomNERDTreeToggle() <CR>
 function! CustomNERDTreeToggle() 
     let g:nerdTreeOpen=0
     let s:isNerdTreeActive=exists("t:NERDTreeBufName")
@@ -362,5 +365,3 @@ function! CustomNERDTreeToggle()
         let g:nerdTreeOpen=1
     endif
 endfunction
-
-autocmd FileType python let b:coc_root_patterns = ['.pyrightconfig.json']
