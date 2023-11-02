@@ -176,6 +176,9 @@ noremap tP "+P
 " 
 cmap w!! w !sudo tee > /dev/null %
 
+" I want to use @ for uncommenting stuff, so map the playback of the recording to \q
+noremap <leader>q @
+
 "
 " > Block commenting, all active for all lang
 "
