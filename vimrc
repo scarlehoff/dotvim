@@ -314,7 +314,6 @@ let g:coc_global_extensions = [
   \ 'coc-esbonio',
   \ 'coc-pyright',
   \ 'coc-vimtex',
-  \ 'coc-yaml',
   \ 'coc-tsserver',
   \ 'coc-highlight',
   \ 'coc-git',

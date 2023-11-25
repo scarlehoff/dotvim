@@ -6,8 +6,7 @@
     "pyright.completion.snippetSupport": false,
     "python.analysis.autoImportCompletions": false,
     "python.linting.pylintEnabled": false,
-    "pyright.inlayHints.variableTypes": false,
-    "pyright.inlayHints.functionReturnTypes": false,
+    "pyright.inlayHints": false,
     "python.analysis.typeCheckingMode": "off",
     "python.analysis.diagnosticSeverityOverrides": {
         "reportGeneralTypeIssues": "warning",
