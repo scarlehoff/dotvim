@@ -333,8 +333,16 @@ set updatetime=500
 " always show signcolumns
 set signcolumn=yes
 " Use <CR> to accept selected completion
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" In order to make <CR> work with bullets and coc.nvim at the same time, we
+" need to modify <CR> with <Plug>(bullets-newline) like below: https://github.com/bullets-vim/bullets.vim/issues/85
+" Basically, we don't allow bullet to add the keymapping and just add the call
+" to <Plug>(bullet-newline) together with the coc-nvim <CR>
+let g:bullets_set_mappings = 0
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() 
+                            \: "\<C-g>u\<Plug>(bullets-newline)\<c-r>=coc#on_enter()\<CR>"
+
 " Use <tab> to navigate completion
 function! CheckBackspace() abort
   let col = col('.') - 1
