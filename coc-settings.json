@@ -1,4 +1,5 @@
 {
+    "snippets.ultisnips.pythonPrompt": false,
     "coc.source.around.enable" : true,
     "coc.preferences.jumpCommand": "vsp",
     "pyright.disableProgressNotifications": true,
