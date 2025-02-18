@@ -36,5 +36,6 @@
     "rust-analyzer": {
         "disableProgressNotifications": true,
         "updates.checkOnStartup": false
-    }
+    },
+    "snippets.ultisnips.pythonPrompt": false
 }

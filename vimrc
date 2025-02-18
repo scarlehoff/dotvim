@@ -76,7 +76,7 @@ if has("gui_running")
     set guioptions-=T " Remove toolbar
     set guioptions+=e " Add tab pages
     set guitablabel=$M\ %t
-else
+elseif has("mac")
     " transparent bg
     autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 endif
@@ -267,6 +267,7 @@ call plug#begin()
     Plug 'godlygeek/tabular', {'on': 'Tab'}
     Plug 'dkarter/bullets.vim'
     Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'ojroques/vim-oscyank', {'branch': 'main'}
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
