@@ -1,0 +1,235 @@
+" Define a bunch of special filetypes
+let myfiletypefile = "~/.vim/myfiletypes.vim"
+set runtimepath+=~/.vim/after/
+
+" > Global options
+"
+filetype indent on " Use per-filetype indent
+set hidden         " switch buffers without saving to file
+set linebreak      " makes sure wrap only happens for characters set in breakat (:./, and the sort, no letters)
+set mmp=10000      " Allow more memory (x10) for pattern matching (useful in markdown)
+set number         " Precede each line with its line number
+set signcolumn=yes " Show always the extra column
+set sidescroll=1   " Left/right
+set scrolloff=3    " Scroll when cursor get within 3 char of the top/bottom edge
+set tabpagemax=150 " Vim defaults to 10 and neovim to 50
+
+"
+" > Global Folding Settings (zc, zo, za)
+"
+set foldmethod=syntax " Fold depending on the lang.
+set foldlevelstart=99 " Open file unfolded
+
+"
+" > Global Indentation options
+" Note: autoindend, smarttab are already on by default in neovim
+" 
+set autoindent    " Copy indent from current line when starting a new one
+set expandtab     " Convert tab to spaces
+set smartindent   " Try being clever for new-line indenting
+set smarttab      " When on a <tab>/<bs> will insert/<remove> blanks according to swhiftwidth
+set shiftround    " Round indent to multiple of shiftwidth
+set shiftwidth=4
+set softtabstop=4 " Number of spaces a <tab> counts for when inserting <tab>
+set tabstop=4     " Number of spaces <tab>s in file counts
+
+"
+" > Global search options
+"
+set ignorecase " Ignore case of letter on searches unless..
+set smartcase  " Overrides 'ignorecase' if the search pattern contains upper and lowe case letters
+
+"
+" > Statusline definition
+"
+" Start with the full filepath
+set statusline+=%F
+" Decorate with flags: [modified?] [read only?] [is help?] [is preview?]
+set statusline+=%m%r%h%w
+" Add fileformat and type
+set statusline+=\ %{&ff}\ %y
+" Location within the file
+set statusline+=\ [L%l/%L,C%v][%p%%]
+
+"
+" > Latex options
+"
+autocmd FileType tex setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
+autocmd FileType bib setlocal isk+=: " very useful for using labels in the form eq:blabla in latex!
+let g:tex_flavor = 'latex' " Identify .tex as latex, so vimtex can load them
+let g:vimtex_view_method = 'zathura' " Now needs to be set here instead of in tex.vim? why?
+let g:vimtex_compiler_latexmk = {
+            \ 'options' : [
+            \   '-shell-escape',
+            \   '-verbose',
+            \   '-file-line-error',
+            \   '-synctex=1',
+            \   '-interaction=nonstopmode',
+            \ ],
+            \}
+
+"
+" > Performance Settings
+"
+set lazyredraw " Just in case we are in a slow place (ssh for instance), only actions that change what you see do a redraw
+
+"
+" > Wildmenu
+" 
+""" Files to ignore when autocompleting
+set wildignore+=.hg,.git,.svn                  " Version control
+set wildignore+=*.aux,*.out,*.toc,*.log,*pdf   "LaTeX intermediate files.
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll          " Compiled object files
+set wildignore+=*.out,*.mod                    " Fortran binary and mods
+set wildignore+=*.pyc                          " Python byte code
+set wildignore+=*.spl                          " Compiled spelling word list
+
+"
+" > Key Mapping
+"
+" F10, enters paste mode
+set pastetoggle=<F10>
+" Remap vim 0 to first non-blank
+map 0 ^
+" disable ex mode
+map Q <Nop> 
+" make j and k navegate through wrapper text as seen in the screen
+nmap j gj
+nmap k gk
+" F8 highlights the current word amd occurrences without moving
+nnoremap <F8> :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
+" Toggle/untoggle spell checking (=z will give you a list of suggestions)
+map "ss :setlocal spell!<CR>
+" Make > and < stay after use
+vmap > >gv
+vmap < <gv
+" pritn -> print
+iab pritn print
+
+"
+" > Clipboard control
+"
+" Use t as a shorthand for using the system clipbard
+noremap ty "+y
+noremap tY "+Y
+noremap tp "+p
+noremap tP "+P
+
+"
+" > If we forgot to use sudo to open a file
+" 
+cmap w!! w !sudo tee > /dev/null %
+
+" I want to use @ for uncommenting stuff, so map the playback of the recording to \q
+noremap <leader>q @
+
+"
+" > Block commenting, all active for all lang
+"
+" Python/Bash/Maple
+"
+vnoremap ~# :s!^!# !<cr>:noh<cr>
+vnoremap @# :s!^# !!<cr>:noh<cr>
+" Latex
+vnoremap ~% :s!^!% !<cr>:noh<cr>
+vnoremap @% :s!^% !!<cr>:noh<cr>
+" C/C++
+vnoremap ~/ :s!^!\/\/!<cr>:noh<cr>
+vnoremap @/ :s!^\/\/!!<cr>:noh<cr>
+" C/Fortran 77
+vnoremap ~c :s!^!c  !<cr>:noh<cr>
+vnoremap @c :s!^c  !!<cr>:noh<cr>
+" Form
+vnoremap ~* :s!^!*  !<cr>:noh<cr>
+vnoremap @* :s!^*  !!<cr>:noh<cr>
+" Fortran90
+vnoremap ~1 :s!^!\!  !<cr>:noh<cr>
+vnoremap @1 :s!^\!  !!<cr>:noh<cr>
+" Vim
+vnoremap ~" :s!^!"  !<cr>:noh<cr>
+vnoremap @" :s!^"  !!<cr>:noh<cr>
+" Lua
+vnoremap ~- :s!^!--  !<cr>:noh<cr>
+vnoremap @- :s!^--  !!<cr>:noh<cr>
+
+"
+" > Return to last known position when opening files
+" 
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
+
+" Open in new tab when doing gf
+nnoremap gf <C-W>gf
+vnoremap gf <C-W>gf
+
+
+"
+" > Make * and # work do its job in visual selection
+" 
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.f')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+
+" ######################################
+" > Plugins 
+" ######################################
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"
+" > Options for plugins both in nvim and vim
+"
+" tabular:
+vnoremap <F3> :Tab /=<CR>
+" nerdtree:
+nmap <F7> :call CustomNERDTreeToggle() <CR>
+
+" fzf:
+if has('nvim')
+	noremap <F4> :FzfLua grep_project<CR>
+	noremap <F2> :FzfLua buffers<CR>
+	" The lua configuration is in init.lua
+else
+	noremap <F4> :Rg<CR>
+	noremap <F2> :Buffers<CR>
+	" > fzf.vim
+    " add enter: 'tab split' to come back
+	let g:fzf_action = {
+				\ 'ctrl-h': 'split',
+				\ 'ctrl-v': 'vsplit'
+				\}
+endif
+
+
+" This might be needed for MacOs
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    set rtp+=/opt/homebrew/opt/fzf
+endif
+
